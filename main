@@ -1,0 +1,69 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+int main(int argc, char** argv)
+
+{/*Création de l’objet imageet lecture de l’image à partir du répertoire associé en utilisant la méthode imread()*/
+	
+	Mat image = imread("D:/Téléchargements/ken.png");
+	
+	// Vérifier si l’image existe bien dans le répertoire
+	
+	if (image.empty()) 
+	{
+		cout << "Could not open or find the image" << endl;
+		cin.get(); //wait for any key press
+		return -1;
+	}
+	
+	// Changement de luminosité dans l’image en utilisant la méthodeconvertTo()
+	Mat imageBrightnessHigh100;
+
+	image.convertTo(imageBrightnessHigh100,-1,1,100);
+
+	Mat imageBrightnessLow100;
+
+	image.convertTo(imageBrightnessLow100,-1,1,-100);
+	
+
+
+	/*Affichage de l’image de l’image originale et des deux nouvelles images dans trois fenêtres différentes avec la méthode imshow ()*/
+	String windowNameOriginalImage = "Original Image"; 
+	String windowNameBrightnessHigh100 = "Brightness Increased by 100"; 
+	String windowNameBrightnessLow100 = "Brightness Decreased by 100"; 
+
+	namedWindow(windowNameOriginalImage, WINDOW_NORMAL); 
+	namedWindow(windowNameBrightnessHigh100, WINDOW_NORMAL); 	
+	namedWindow(windowNameBrightnessLow100,WINDOW_NORMAL);
+
+	imshow(windowNameOriginalImage, image); 
+	imshow(windowNameBrightnessHigh100, imageBrightnessHigh100); 
+	imshow(windowNameBrightnessLow100, imageBrightnessLow100);
+	
+	/*Test de medianblur */
+	/* Mat Ken;
+	String Ken;
+	for (int i = 1; i < MAX_KERNEL_LENGTH; i = i + 2)
+	{
+		medianBlur(image, Ken , i);
+
+		if (display_dst(DELAY_BLUR) != 0)
+		{ 
+			return 0; 
+		}
+	}
+	
+	*/
+
+
+	// Sauvegarde d’une image traitée à l'aide de la méthode imwrite ()
+	
+	imwrite("E:\My_new_image.jpg", imageBrightnessHigh100);
+
+	waitKey(0); destroyAllWindows();
+	
+	return 0;
+}
