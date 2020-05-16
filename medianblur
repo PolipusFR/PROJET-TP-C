@@ -1,3 +1,0 @@
-for ( int i = 1; i < MAX_KERNEL_LENGTH; i = i + 2 )
-    { medianBlur ( src, dst, i );
-      if( display_dst( DELAY_BLUR ) != 0 ) { return 0; } }
