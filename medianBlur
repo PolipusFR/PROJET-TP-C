@@ -1,6 +1,0 @@
-/* medianblur */
-
-	Mat median_blur;
-	medianBlur(image, median_blur, 5);
-	imshow("median blur", median_blur);
-	waitKey(0);
